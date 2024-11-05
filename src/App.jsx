@@ -1,18 +1,33 @@
 import "./App.css";
+import { useState } from "react";
 
 function App() {
+  const [message, setMessage] = useState("Greeting Message");
+  const [input, setInput] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setMessage(input);
+    setInput("");
+  };
+
   return (
-    <div className="App">
-      <div className="greeting-container">Greeting Message</div>
+    <form className="App" onSubmit={handleSubmit}>
+      <div className="greeting-container">{message}</div>
       <div className="input-container">
         <label htmlFor="greeting-message">New Greeting Message</label>
-        <input id="greeting-message" type="text" />
+        <input
+          id="greeting-message"
+          type="text"
+          value={input}
+          onChange={(event) => setInput(event.target.value)}
+        />
       </div>
 
       <div className="buttons">
-        <button>Update text</button>
+        <button type="submit">Update text</button>
       </div>
-    </div>
+    </form>
   );
 }
 
